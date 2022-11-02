@@ -32,6 +32,14 @@ public class Theatre {
         int lastRow = 'A' + (numRows -1);
         for (char row = 'A'; row <= lastRow; row++) {
             for(int seatNum = 1; seatNum <= seatsPerRow; seatNum++) {
+                double price = 12.00;
+
+                if((row < 'D') && (seatNum >=4 && seatNum <=9)) {
+                    price = 14.00;
+                } else if((row > 'F') || (seatNum < 4 || seatNum > 9)) {
+                    price = 7.00;
+                }
+
                 Seat seat = new Seat(row + String.format("%02d", seatNum));
                 seats.add(seat);
             }

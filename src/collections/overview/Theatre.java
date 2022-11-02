@@ -1,6 +1,7 @@
 package collections.overview;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Theatre {
@@ -53,7 +54,7 @@ public class Theatre {
         }
     }
 
-    class Seat implements Comparable<Seat> {
+    public class Seat implements Comparable<Seat> {
         private final String seatNumber;
         private boolean reserved = false;
 
@@ -64,6 +65,23 @@ public class Theatre {
         @Override
         public int compareTo(Seat o) {
             return this.seatNumber.compareToIgnoreCase(seat.getSeatNumber());
+        }
+
+        static final Comparator<Seat> PRICE_ORDER;
+
+        static {
+            PRICE_ORDER = new Comparator<Seat>() {
+                @Override
+                public int compare(Seat seat1, Seat seat2) {
+                    if (seat1.getPrice() < seat2.getPrice()) {
+                        return -1;
+                    } else if (seat1.getPrice() > seat2.getPrice()) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                }
+            };
         }
 
         public boolean reserve() {

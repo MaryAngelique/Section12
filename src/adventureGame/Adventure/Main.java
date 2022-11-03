@@ -46,6 +46,15 @@ public class Main {
                 break;
             }
 
+            Map<String, Integer> exits = locations.get(loc).getExits();
+            System.out.print("Available exits are ");
+            for(String exit: exits.keySet()) {
+                System.out.print(exit + ", ");
+            }
+            System.out.println();
+
+            String direction = scanner.nextLine().toUpperCase();
+
             loc = scanner.nextInt();
             if(!locations.containsKey(loc)) {
                 System.out.println("You cannot go in that direction");

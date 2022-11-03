@@ -72,9 +72,11 @@ public class Theatre {
     public class Seat implements Comparable<Seat> {
         private final String seatNumber;
         private boolean reserved = false;
+        private double price;
 
         public Seat(String seatNumber) {
             this.seatNumber = seatNumber;
+            this.price = price;
         }
 
         @Override

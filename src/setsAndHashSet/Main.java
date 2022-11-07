@@ -107,8 +107,6 @@ public class Main {
         Object o = new Object();
         o.equals(o);
         "pluto".equals("");
-
-
     }
 
 }

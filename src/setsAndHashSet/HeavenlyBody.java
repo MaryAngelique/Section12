@@ -8,11 +8,22 @@ public class HeavenlyBody {
     private final String name;
     private final double orbitalPeriod;
     private final Set<HeavenlyBody> satellites;
+    private final BodyTypes bodyType;
+
+    public enum BodyTypes {
+        STAR,
+        PLANET,
+        DWARF_PLANET,
+        MOON,
+        COMET,
+        ASTEROID
+    }
 
     public HeavenlyBody(String name, double orbitalPeriod) {
         this.name = name;
         this.orbitalPeriod = orbitalPeriod;
         this.satellites = new HashSet<>();
+        this.bodyType = bodyType;
     }
 
     public String getName() {
@@ -23,7 +34,11 @@ public class HeavenlyBody {
         return orbitalPeriod;
     }
 
-    public boolean addMoon(HeavenlyBody moon) {
+    public BodyTypes getBodyType() {
+        return bodyType;
+    }
+
+    public boolean addSattelite(HeavenlyBody moon) {
         return this.satellites.add(moon);
     }
 
@@ -37,14 +52,13 @@ public class HeavenlyBody {
             return true;
         }
 
-        System.out.println("obj.getClass() is " + obj.getClass());
-        System.out.println("this.getClass() is " + this.getClass());
-        if ((obj == null) || (obj.getClass() != this.getClass())) {
-            return false;
+        if(obj instanceof HeavenlyBody) {
+            HeavenlyBody theObject = (HeavenlyBody) obj;
+            if(this.name.equals(theObject.getName())) {
+                return this.bodyType == theObject.getBodyType();
+            }
         }
-
-        String objName = ((HeavenlyBody) obj).getName();
-        return this.name.equals(objName);
+        return false;
     }
 
     @Override
@@ -53,5 +67,9 @@ public class HeavenlyBody {
         return this.name.hashCode() + 57;
     }
 
+    @Override
+    public String toString() {
+        return this.name + ": " + this.bodyType + ", " + this.orbitalPeriod;
+    }
 
 }

@@ -3,7 +3,7 @@ package setsAndHashSet;
 import java.util.HashSet;
 import java.util.Set;
 
-public class HeavenlyBody {
+public abstract class HeavenlyBody {
 
     private final String name;
     private final double orbitalPeriod;
@@ -19,7 +19,7 @@ public class HeavenlyBody {
         ASTEROID
     }
 
-    public HeavenlyBody(String name, double orbitalPeriod) {
+    public HeavenlyBody(String name, double orbitalPeriod, BodyTypes dwarfPlanet) {
         this.name = name;
         this.orbitalPeriod = orbitalPeriod;
         this.satellites = new HashSet<>();
@@ -47,7 +47,7 @@ public class HeavenlyBody {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public final boolean equals(Object obj) {
         if(this == obj) {
             return true;
         }
@@ -62,9 +62,8 @@ public class HeavenlyBody {
     }
 
     @Override
-    public int hashCode() {
-        System.out.println("hashcode called");
-        return this.name.hashCode() + 57;
+    public final int hashCode() {
+        return this.name.hashCode() + 57 + this.bodyType.hashCode();
     }
 
     @Override
